@@ -1,0 +1,27 @@
+<launch>
+
+  <arg name="drone_num"/>
+  <arg name="model"/>
+  <arg name="run_id" default="1"/>
+  
+  <arg name="log_folder"       default="$(find exploration_manager)/exp_logs"/>
+  <arg name="odometry_rate"    default="10.0"/>
+  <arg name="logging_rate"     default="200.0"/>
+  <arg name="heartbit_time"    default="60.0"/>
+    
+  <node pkg="logging_utils" type="logging_node" name="logging_node" output="screen" launch-prefix="">
+    <!-- Parameters -->
+    <param name="drone_num"           value="$(arg drone_num)"/>
+
+    <!-- Map file contains max allowed time -->
+    <rosparam command="load" file="$(find exploration_manager)/config/maps/$(arg model).yaml" />
+    
+    <param name="log_folder"          value="$(arg log_folder)"/>
+    <param name="odometry_rate"       value="$(arg odometry_rate)"/>
+    <param name="logging_rate"        value="$(arg logging_rate)"/>
+    <param name="max_heartbit_time"   value="$(arg heartbit_time)"/>
+    
+    <param name="odom_topic"          value="state_ukf/odom"/>
+  </node>
+    
+</launch>

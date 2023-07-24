@@ -1,0 +1,264 @@
+<launch>
+  <!-- size of map, change the size in x, y, z according to your application -->
+  <arg name="map_size_x" default="35.0"/>
+  <arg name="map_size_y" default="35.0"/>
+  <arg name="map_size_z" default=" 3.5"/>
+  
+  <!-- Global odom prefix -->
+  <arg name="odom_prefix" value="/state_ukf/odom" />
+  <arg name="drone_num"   default="4" />
+  
+  <!-- Planner Type -->
+  <arg name="planner_type"    default="fame"/>
+  
+  <!-- Renderer (Vulkan) -->
+  <arg name="vulkan_renderer" default="false"/>
+  <arg name="model" default="forest_50x50_01_200"/>
+  
+  <!-- Logging -->
+  <arg name="log_folder" default="$(env HOME)/exp_logs/test"/> 
+
+  <!-- Ablation study (FAME only) -->
+  <arg name="role_assigner_fixed" default="false"/>
+  <arg name="role_assigner_fix_role" default="0"/> <!-- 0: EXPL, 1: GC -->
+  <arg name="active_collaboration" default="true"/>
+
+  <!-- Ablation study (all) -->
+  <arg name="communication_range" default="100000.0"/>
+  
+  <!-- Map generation -->
+  <node pkg ="map_generator" name ="map_pub" type ="map_pub" output = "screen" args="$(find map_generator)/resource/$(arg model).pcd" unless="$(arg vulkan_renderer)"> 
+  </node>
+
+<include file="$(find exploration_manager)/launch/single_drone_exploration.xml" if="$(eval arg('drone_num') >= 1)">
+    <arg name="drone_id" value="1"/>
+    <arg name="init_x"   value="0"/>
+    <arg name="init_y"   value="0"/>
+    <arg name="init_z"   value="1"/> 
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_prefix" value="$(arg odom_prefix)"/>
+    <arg name="drone_num" value="$(eval arg('drone_num') + 1)"/>
+    <arg name="simulation" default="true"/>
+    <arg name="vulkan_renderer" value="$(arg vulkan_renderer)"/>
+    <arg name="model" value="$(arg model)"/>
+    <arg name="planner_type" value="$(arg planner_type)"/>
+    <arg name="log_folder" value="$(arg log_folder)"/>
+    <!-- Ablation study (FAME only) -->
+    <arg name="role_assigner_fixed" default="$(arg role_assigner_fixed)"/>
+    <arg name="role_assigner_fix_role" default="$(arg role_assigner_fix_role)"/>
+    <arg name="active_collaboration" default="$(arg active_collaboration)"/>
+    <!-- Ablation study (all) -->
+    <arg name="communication_range" default="$(arg communication_range)"/>
+  </include>
+
+  <include file="$(find exploration_manager)/launch/single_drone_exploration.xml" if="$(eval arg('drone_num') >= 2)">
+    <arg name="drone_id" value="2"/>
+    <arg name="init_x"   value="0"/>
+    <arg name="init_y"   value="-1"/>
+    <arg name="init_z"   value="1"/> 
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_prefix" value="$(arg odom_prefix)"/>
+    <arg name="drone_num" value="$(eval arg('drone_num') + 1)"/>
+    <arg name="simulation" default="true"/>
+    <arg name="vulkan_renderer" value="$(arg vulkan_renderer)"/>
+    <arg name="model" value="$(arg model)"/>
+    <arg name="planner_type" value="$(arg planner_type)"/>
+    <arg name="log_folder" value="$(arg log_folder)"/>
+    <!-- Ablation study (FAME only) -->
+    <arg name="role_assigner_fixed" default="$(arg role_assigner_fixed)"/>
+    <arg name="role_assigner_fix_role" default="$(arg role_assigner_fix_role)"/>
+    <arg name="active_collaboration" default="$(arg active_collaboration)"/>
+    <!-- Ablation study (all) -->
+    <arg name="communication_range" default="$(arg communication_range)"/>
+  </include>
+
+  <include file="$(find exploration_manager)/launch/single_drone_exploration.xml" if="$(eval arg('drone_num') >= 3)">
+    <arg name="drone_id" value="3"/>
+    <arg name="init_x"   value="1"/>
+    <arg name="init_y"   value="-1"/>
+    <arg name="init_z"   value="1"/> 
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_prefix" value="$(arg odom_prefix)"/>
+    <arg name="drone_num" value="$(eval arg('drone_num') + 1)"/>
+    <arg name="simulation" default="true"/>
+    <arg name="vulkan_renderer" value="$(arg vulkan_renderer)"/>
+    <arg name="model" value="$(arg model)"/>
+    <arg name="planner_type" value="$(arg planner_type)"/>
+    <arg name="log_folder" value="$(arg log_folder)"/>
+    <!-- Ablation study (FAME only) -->
+    <arg name="role_assigner_fixed" default="$(arg role_assigner_fixed)"/>
+    <arg name="role_assigner_fix_role" default="$(arg role_assigner_fix_role)"/>
+    <arg name="active_collaboration" default="$(arg active_collaboration)"/>
+    <!-- Ablation study (all) -->
+    <arg name="communication_range" default="$(arg communication_range)"/>
+  </include>
+
+  <include file="$(find exploration_manager)/launch/single_drone_exploration.xml" if="$(eval arg('drone_num') >= 4)">
+    <arg name="drone_id" value="4"/>
+    <arg name="init_x"   value="1"/>
+    <arg name="init_y"   value="0"/>
+    <arg name="init_z"   value="1"/> 
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_prefix" value="$(arg odom_prefix)"/>
+    <arg name="drone_num" value="$(eval arg('drone_num') + 1)"/>
+    <arg name="simulation" default="true"/>
+    <arg name="vulkan_renderer" value="$(arg vulkan_renderer)"/>
+    <arg name="model" value="$(arg model)"/>
+    <arg name="planner_type" value="$(arg planner_type)"/>
+    <arg name="log_folder" value="$(arg log_folder)"/>
+    <!-- Ablation study (FAME only) -->
+    <arg name="role_assigner_fixed" default="$(arg role_assigner_fixed)"/>
+    <arg name="role_assigner_fix_role" default="$(arg role_assigner_fix_role)"/>
+    <arg name="active_collaboration" default="$(arg active_collaboration)"/>
+    <!-- Ablation study (all) -->
+    <arg name="communication_range" default="$(arg communication_range)"/>
+  </include>
+
+  <include file="$(find exploration_manager)/launch/single_drone_exploration.xml" if="$(eval arg('drone_num') >= 5)">
+    <arg name="drone_id" value="5"/>
+    <arg name="init_x"   value="1"/>
+    <arg name="init_y"   value="1"/>
+    <arg name="init_z"   value="1"/> 
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_prefix" value="$(arg odom_prefix)"/>
+    <arg name="drone_num" value="$(eval arg('drone_num') + 1)"/>
+    <arg name="simulation" default="true"/>
+    <arg name="vulkan_renderer" value="$(arg vulkan_renderer)"/>
+    <arg name="model" value="$(arg model)"/>
+    <arg name="planner_type" value="$(arg planner_type)"/>
+    <arg name="log_folder" value="$(arg log_folder)"/>
+    <!-- Ablation study (FAME only) -->
+    <arg name="role_assigner_fixed" default="$(arg role_assigner_fixed)"/>
+    <arg name="role_assigner_fix_role" default="$(arg role_assigner_fix_role)"/>
+    <arg name="active_collaboration" default="$(arg active_collaboration)"/>
+    <!-- Ablation study (all) -->
+    <arg name="communication_range" default="$(arg communication_range)"/>
+  </include>
+  
+
+  <include file="$(find exploration_manager)/launch/single_drone_exploration.xml" if="$(eval arg('drone_num') >= 6)">
+    <arg name="drone_id" value="6"/>
+    <arg name="init_x"   value="0"/>
+    <arg name="init_y"   value="1"/>
+    <arg name="init_z"   value="1"/> 
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_prefix" value="$(arg odom_prefix)"/>
+    <arg name="drone_num" value="$(eval arg('drone_num') + 1)"/>
+    <arg name="simulation" default="true"/>
+    <arg name="vulkan_renderer" value="$(arg vulkan_renderer)"/>
+    <arg name="model" value="$(arg model)"/>
+    <arg name="planner_type" value="$(arg planner_type)"/>
+    <arg name="log_folder" value="$(arg log_folder)"/>
+    <!-- Ablation study (FAME only) -->
+    <arg name="role_assigner_fixed" default="$(arg role_assigner_fixed)"/>
+    <arg name="role_assigner_fix_role" default="$(arg role_assigner_fix_role)"/>
+    <arg name="active_collaboration" default="$(arg active_collaboration)"/>
+    <!-- Ablation study (all) -->
+    <arg name="communication_range" default="$(arg communication_range)"/>
+  </include> -->
+
+  <include file="$(find exploration_manager)/launch/single_drone_exploration.xml" if="$(eval arg('drone_num') >= 7)">
+    <arg name="drone_id" value="7"/>
+    <arg name="init_x"   value="-1"/>
+    <arg name="init_y"   value="1"/>
+    <arg name="init_z"   value="1"/> 
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_prefix" value="$(arg odom_prefix)"/>
+    <arg name="drone_num" value="$(eval arg('drone_num') + 1)"/>
+    <arg name="simulation" default="true"/>
+    <arg name="vulkan_renderer" value="$(arg vulkan_renderer)"/>
+    <arg name="model" value="$(arg model)"/>
+    <arg name="planner_type" value="$(arg planner_type)"/>
+    <arg name="log_folder" value="$(arg log_folder)"/>
+    <!-- Ablation study (FAME only) -->
+    <arg name="role_assigner_fixed" default="$(arg role_assigner_fixed)"/>
+    <arg name="role_assigner_fix_role" default="$(arg role_assigner_fix_role)"/>
+    <arg name="active_collaboration" default="$(arg active_collaboration)"/>
+    <!-- Ablation study (all) -->
+    <arg name="communication_range" default="$(arg communication_range)"/>
+  </include>
+
+  <include file="$(find exploration_manager)/launch/single_drone_exploration.xml" if="$(eval arg('drone_num') >= 8)">
+    <arg name="drone_id" value="8"/>
+    <arg name="init_x"   value="-1"/>
+    <arg name="init_y"   value="0"/>
+    <arg name="init_z"   value="1"/> 
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_prefix" value="$(arg odom_prefix)"/>
+    <arg name="drone_num" value="$(eval arg('drone_num') + 1)"/>
+    <arg name="simulation" default="true"/>
+    <arg name="vulkan_renderer" value="$(arg vulkan_renderer)"/>
+    <arg name="model" value="$(arg model)"/>
+    <arg name="planner_type" value="$(arg planner_type)"/>
+    <arg name="log_folder" value="$(arg log_folder)"/>
+    <!-- Ablation study (FAME only) -->
+    <arg name="role_assigner_fixed" default="$(arg role_assigner_fixed)"/>
+    <arg name="role_assigner_fix_role" default="$(arg role_assigner_fix_role)"/>
+    <arg name="active_collaboration" default="$(arg active_collaboration)"/>
+    <!-- Ablation study (all) -->
+    <arg name="communication_range" default="$(arg communication_range)"/>
+  </include>
+
+  <include file="$(find exploration_manager)/launch/single_drone_exploration.xml" if="$(eval arg('drone_num') >= 9)">
+    <arg name="drone_id" value="9"/>
+    <arg name="init_x"   value="-1"/>
+    <arg name="init_y"   value="-1"/>
+    <arg name="init_z"   value="1"/> 
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_prefix" value="$(arg odom_prefix)"/>
+    <arg name="drone_num" value="$(eval arg('drone_num') + 1)"/>
+    <arg name="simulation" default="true"/>
+    <arg name="vulkan_renderer" value="$(arg vulkan_renderer)"/>
+    <arg name="model" value="$(arg model)"/>
+    <arg name="planner_type" value="$(arg planner_type)"/>
+    <arg name="log_folder" value="$(arg log_folder)"/>
+    <!-- Ablation study (FAME only) -->
+    <arg name="role_assigner_fixed" default="$(arg role_assigner_fixed)"/>
+    <arg name="role_assigner_fix_role" default="$(arg role_assigner_fix_role)"/>
+    <arg name="active_collaboration" default="$(arg active_collaboration)"/>
+    <!-- Ablation study (all) -->
+    <arg name="communication_range" default="$(arg communication_range)"/>
+  </include>
+
+  <include file="$(find exploration_manager)/launch/single_drone_exploration.xml" if="$(eval arg('drone_num') >= 10)">
+    <arg name="drone_id" value="10"/>
+    <arg name="init_x"   value="0"/>
+    <arg name="init_y"   value="-5.0"/>
+    <arg name="init_z"   value="1"/> 
+    <arg name="map_size_x" value="$(arg map_size_x)"/>
+    <arg name="map_size_y" value="$(arg map_size_y)"/>
+    <arg name="map_size_z" value="$(arg map_size_z)"/>
+    <arg name="odom_prefix" value="$(arg odom_prefix)"/>
+    <arg name="drone_num" value="$(eval arg('drone_num') + 1)"/>
+    <arg name="simulation" default="true"/>
+    <arg name="vulkan_renderer" value="$(arg vulkan_renderer)"/>
+    <arg name="model" value="$(arg model)"/>
+    <arg name="planner_type" value="$(arg planner_type)"/>
+    <arg name="log_folder" value="$(arg log_folder)"/>
+    <!-- Ablation study (FAME only) -->
+    <arg name="role_assigner_fixed" default="$(arg role_assigner_fixed)"/>
+    <arg name="role_assigner_fix_role" default="$(arg role_assigner_fix_role)"/>
+    <arg name="active_collaboration" default="$(arg active_collaboration)"/>
+    <!-- Ablation study (all) -->
+    <arg name="communication_range" default="$(arg communication_range)"/>
+  </include>
+
+</launch>

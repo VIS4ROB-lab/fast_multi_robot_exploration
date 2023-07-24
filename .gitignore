@@ -1,0 +1,11 @@
+*.user
+*.vscode
+*log_time*
+
+*.tour
+*.atsp
+*.par
+*.csv
+*.pdf
+*logs*
+*_old*

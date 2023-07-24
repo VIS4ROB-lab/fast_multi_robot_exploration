@@ -1,0 +1,43 @@
+<launch>
+  <node pkg ="map_generator" name ="random_forest" type ="multi_density" output = "screen">    
+    <remap from="~odometry"   to="empty"/>    
+    <param name="init_state_x"   value="0"/>
+    <param name="init_state_y"   value="0"/>
+    <param name="map/x_size"     value="50" />
+    <param name="map/y_size"     value="50" />
+    <param name="map/z_size"     value="3" />
+    <param name="map/resolution" value="0.09"/>        
+
+    <param name="ObstacleShape/seed" value="1"/>
+    <param name="map/local_sampling_radius" value="1.5"/>
+
+    <param name="map/obs_num_0"    value="50"/>
+    <param name="map/occl_num_0"   value="5"/>
+
+    <param name="map/obs_num_1"    value="40"/>
+    <param name="map/occl_num_1"   value="5"/>
+
+    <param name="map/obs_num_2"    value="20"/>
+    <param name="map/occl_num_2"   value="5"/>
+
+    <param name="map/obs_num_3"    value="10"/>
+    <param name="map/occl_num_3"   value="5"/>
+            
+    <!-- <param name="map/obs_num"    value="$(arg p_num)"/> -->
+    <param name="ObstacleShape/lower_rad" value="0.5"/>
+    <param name="ObstacleShape/upper_rad" value="0.8"/>
+    <param name="ObstacleShape/lower_hei" value="2.0"/>
+    <param name="ObstacleShape/upper_hei" value="2.0"/>        
+
+    <!-- <param name="map/circle_num" value="$(arg c_num)"/>         -->
+    <param name="ObstacleShape/radius_l" value="0.7"/>        
+    <param name="ObstacleShape/radius_h" value="0.8"/>        
+    <param name="ObstacleShape/z_l" value="0.7"/>        
+    <param name="ObstacleShape/z_h" value="0.8"/>        
+    <param name="ObstacleShape/theta" value="0.5"/>        
+
+    <param name="sensing/radius" value="5.0"/>        
+    <param name="sensing/rate"   value="10.0"/>        
+  </node>
+
+</launch>  

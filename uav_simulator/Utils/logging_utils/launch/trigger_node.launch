@@ -1,0 +1,10 @@
+<launch>
+
+  <arg name="waiting_time" default="15.0"/>
+    
+  <node pkg="logging_utils" type="trigger_node" name="trigger_node" output="screen" launch-prefix="">
+    <!-- Parameters -->
+    <param name="waiting_time" value="$(arg waiting_time)"/>
+  </node>
+    
+</launch>

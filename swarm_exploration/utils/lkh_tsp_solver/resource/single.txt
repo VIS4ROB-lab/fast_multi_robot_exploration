@@ -1,0 +1,11 @@
+NAME : single.661.tour
+COMMENT : Length = 661
+COMMENT : Found by LKH [Keld Helsgaun] Mon Feb 27 22:47:40 2023
+TYPE : TOUR
+DIMENSION : 3
+TOUR_SECTION
+1
+2
+3
+-1
+EOF
